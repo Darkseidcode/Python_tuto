@@ -7,23 +7,27 @@ il faut mettre self en parametre et
 . pour appeler les variables d'instance
 '''
 class Personne: #Convention P en majuscule
-    def __init__(self, nom: str = "", age: int = 0): #Constructeur
+    def __init__(self, nom: str , age: int = 0): #Constructeur
         self.nom = nom # on def la variable d'instance self.la variable = à la varible pour pouvoir la réutiliser dans la classe
         self.age = age # Création de variable d'instance age
-        if nom == "":
+
+        if nom == "": 
             self.DemanderLeNom()
-            print("Constructeur personne : " + self.nom)
-
-        if age == 0:
+            print("La personne a bien été intégré dans le Constructeur : " + self.nom)
+# Si on met les inputs dans la creation de personne "personne1 = Personne()", 
+# on peut enlever les if avec les self.DemanderLeNom() et self.Demanderage() qui sont dedant
+# mais avec les if, il faut obligatoirement def DemanderLeNom(self) et Demanderage(self)
+        if age == 0: # même chose qu'en haut
             self.Demanderage()
-            print("Constructeur personne : " + str(self.age))
+            print("L'age de la personne a bien été intégré dans le Constructeur : " + str(self.age))
 
 
 
-    def SePresenter(self): 
+    def SePresenter(self): #Acrion de se présenter, sela permet d'afficher les informations de la personne après les avoir rentré
         info_personne = "Bonjour, je m'appelle " + self.nom #concatenation de chaine de caractère
         if self.age != 0 : #si l'age est different de 0 alors on affiche l'age
             info_personne += " et j'ai " + str(self.age) + " ans" #concatenation de chaine de caractère
+        print("--"*20) #delimiteur
         print(info_personne) #affichage des informations
         print("Je suis majeur" if self.Estmajeur() else "Je suis mineur") #affichage si la personne est majeur ou mineur
         print("--"*20) #delimiteur
@@ -54,12 +58,23 @@ dans la console.
 
 '''
 
-personne1 = Personne() #Creation personne
-# personne2 = Personne() #Creation personne
+nombre_de_personnes = int(input("Combien de personnes voulez-vous créer ? ")) #demande le nombre de personnes à créer
+liste_personnes = [] #creation d'une liste vide pour stocker les personnes
 
+for i in range(nombre_de_personnes): #boucle pour creer le nombre de personne demandé
+    liste_personnes.append(Personne("", 0)) #ajout de personne dans la liste
+#-------
+#personne1 = Personne() #Creation personne et si pas de def et de if dans init, on met les infos dans les parenthèses
+# personne2 = Personne() #Creation personne
+# Si l'odre des paramètre n'est pas respécté dans la creation de personne, il faut le spécifier
 # personne3 = Personne()
+#-------
 
 ''''Presentation des personnes'''
-personne1.SePresenter()
+for personne in liste_personnes: #boucle pour afficher les informations de chaque personne
+    personne.SePresenter() #appel de la methode SePresenter pour chaque personne
+#-------
+#personne1.SePresenter()
 # personne2.SePresenter() #methode d'instance
 # personne3.SePresenter()
+#-------
